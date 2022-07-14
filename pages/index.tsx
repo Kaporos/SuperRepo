@@ -10,14 +10,4 @@ function HomePage() {
         </>
     )
 }
-
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    console.log(process.env.GITHUB_ID)
-
-    return {
-        props: {}
-    }
-}
-
 export default HomePage

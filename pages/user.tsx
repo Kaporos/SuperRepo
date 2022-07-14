@@ -9,10 +9,7 @@ export default function User() {
     if (!session) {
         return (
             <>Not signed in <br/>
-
                 <button onClick={() => signIn()}>Sign in</button>
-
-
             </>
         )
     }
