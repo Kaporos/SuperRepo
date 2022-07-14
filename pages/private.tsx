@@ -1,7 +1,7 @@
-import {signIn, signOut, useSession} from "next-auth/react";
+import {signIn} from "next-auth/react";
 import {GetServerSideProps} from "next";
 import {unstable_getServerSession} from "next-auth";
-import { authOptions } from "./api/auth/[...nextauth]"
+import {authOptions} from "./api/auth/[...nextauth]"
 
 export default function Private({server_session}) {
     console.log(server_session)
