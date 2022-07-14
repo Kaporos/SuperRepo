@@ -4,7 +4,8 @@ import {unstable_getServerSession} from "next-auth";
 import {authOptions} from "./api/auth/[...nextauth]"
 
 export default function Private({server_session}) {
-    console.log(server_session)
+    if (typeof window === "undefined") return null
+
     if (server_session) {
         return (
             <>
