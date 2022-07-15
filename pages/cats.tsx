@@ -12,6 +12,10 @@ export default function Cats() {
 
     const createCat = async () => {
         const name = inputRef.current.value
+        if (name.length > 15) {
+            alert("Non horacio, le nom ne peut pas dépasser 15 caractères MDR")
+            return
+        }
         await fetcher("/api/mongo/create/"+name)
         await mutate("/api/mongo/get")
         inputRef.current.value = ""
