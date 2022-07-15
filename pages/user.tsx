@@ -2,7 +2,14 @@ import {signIn, signOut, useSession} from "next-auth/react";
 import Link from "next/link";
 
 export default function User() {
-    const {data: session} = useSession()
+    const {data: session, status} = useSession()
+    if (status == "loading") {
+        return (
+            <>
+                <p>Loading...</p>
+            </>
+        )
+    }
     if (!session) {
         return (
             <>Not signed in <br/>

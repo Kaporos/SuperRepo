@@ -1,36 +1,25 @@
-import {signIn} from "next-auth/react";
+import {signIn, useSession} from "next-auth/react";
 import {GetServerSideProps} from "next";
 import {unstable_getServerSession} from "next-auth";
 import {authOptions} from "./api/auth/[...nextauth]"
 
-export default function Private({server_session}) {
-    if (typeof window === "undefined") return null
+export default function Private() {
+    const {data: session, status} = useSession()
 
-    if (server_session) {
+    if (status == "loading") {
         return (
             <>
-                <p>This is private !</p>
+                <p>Loading...</p>
             </>
         )
     }
-    else {
+    if (status == "unauthenticated") {
         signIn()
     }
-}
+    return (
+        <>
+            <p>Welcome to private content !</p>
 
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-    const server_session = await unstable_getServerSession(
-        context.req,
-        context.res,
-        authOptions
+        </>
     )
-    if (server_session) {
-        server_session.user.email = ""
-    }
-    return {
-        props: {
-            server_session
-        }
-    }
 }
