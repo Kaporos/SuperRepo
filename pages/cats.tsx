@@ -24,7 +24,7 @@ export default function Cats() {
             <button onClick={createCat}>Create cat !</button>
             {cats ? cats.reverse().map((cat) => (
                 <>
-                    <p>- <strong>{cat.name}</strong></p>
+                    <p>- {cat.name}</p>
 
                 </>
             )) : <></>}
