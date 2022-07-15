@@ -1,13 +1,17 @@
-import {Db, MongoClient} from "mongodb";
+import mongoose from "mongoose";
 
-async function getClient(): Promise<MongoClient> {
-    const client = new MongoClient(process.env.MONGODB_URI)
-    await client.connect()
-    return client
+export async function dbSetup() {
+    await mongoose.connect(process.env.MONGODB_URI)
 }
 
-export async function getDatabase(): Promise<Db> {
-    const client = await getClient()
-    const database = client.db(process.env.MONGODB_DATABASE)
-    return database
+export interface ICat {
+    name: string
 }
+export const Cat: mongoose.Model<ICat> = mongoose.models.Cat || mongoose.model("Cat", new mongoose.Schema<ICat>({
+    name: {
+        type: "String",
+        unique: true,
+        required: true,
+        dropDups: true
+    }
+}))
